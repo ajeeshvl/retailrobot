@@ -1,4 +1,4 @@
-package com.infosys.retailrobot.utils;
+package com.infosys.retailrobot.gherkin;
 
 import gherkin.deps.com.google.gson.Gson;
 import gherkin.deps.com.google.gson.reflect.TypeToken;
@@ -14,13 +14,12 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import com.infosys.retailrobot.entities.Feature;
 
 public class GherkinMapper{
 
 	long startTime = System.currentTimeMillis();
 
-	public Feature getFeature(String fPath) {
+	public Feature mapFeatureToObject(String fPath) {
 		String gherkin = null;
 		try {
 			gherkin = FixJava.readReader(new InputStreamReader(
@@ -45,17 +44,14 @@ public class GherkinMapper{
 		formatter.close();
 		System.out.println("json output: " + json);
 		Gson gson = new Gson();
-
 		List<Feature> features = gson.fromJson(json.toString(),
 				new TypeToken<List<Feature>>() {
 				}.getType());
-
-		long endTime = System.currentTimeMillis();
-		// optional
-		System.out.println("n Total Running Time: " + (endTime - startTime)
-				+ " milliseconds");
 		return features.get(0);
+		
 	}
+
+	
 	public void writeJsonToFile(String jPath, String json){
 		try {
 			FileWriter file = new FileWriter(jPath);

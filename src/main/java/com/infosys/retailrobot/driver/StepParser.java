@@ -1,11 +1,9 @@
-package com.infosys.retailrobot.utils;
+package com.infosys.retailrobot.driver;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.infosys.retailrobot.entities.Command;
 
 public class StepParser {
 

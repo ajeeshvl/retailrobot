@@ -1,4 +1,4 @@
-package com.infosys.retailrobot.entities;
+package com.infosys.retailrobot.gherkin;
 
 import gherkin.deps.com.google.gson.annotations.Expose;
 import gherkin.deps.com.google.gson.annotations.SerializedName;
@@ -6,7 +6,7 @@ import gherkin.deps.com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Element {
+public class Feature {
 
 	@SerializedName("id")
 	@Expose
@@ -23,12 +23,12 @@ public class Element {
 	@SerializedName("line")
 	@Expose
 	private Integer line;
-	@SerializedName("steps")
+	@SerializedName("elements")
 	@Expose
-	private List<Step> steps = new ArrayList<Step>();
-	@SerializedName("type")
+	private List<Element> elements = new ArrayList<Element>();
+	@SerializedName("uri")
 	@Expose
-	private String type;
+	private String uri;
 
 	/**
 	 * 
@@ -117,36 +117,36 @@ public class Element {
 
 	/**
 	 * 
-	 * @return The steps
+	 * @return The elements
 	 */
-	public List<Step> getSteps() {
-		return steps;
+	public List<Element> getElements() {
+		return elements;
 	}
 
 	/**
 	 * 
-	 * @param steps
-	 *            The steps
+	 * @param elements
+	 *            The elements
 	 */
-	public void setSteps(List<Step> steps) {
-		this.steps = steps;
+	public void setElements(List<Element> elements) {
+		this.elements = elements;
 	}
 
 	/**
 	 * 
-	 * @return The type
+	 * @return The uri
 	 */
-	public String getType() {
-		return type;
+	public String getUri() {
+		return uri;
 	}
 
 	/**
 	 * 
-	 * @param type
-	 *            The type
+	 * @param uri
+	 *            The uri
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 
 }

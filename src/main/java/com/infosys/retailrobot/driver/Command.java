@@ -1,4 +1,4 @@
-package com.infosys.retailrobot.entities;
+package com.infosys.retailrobot.driver;
 
 public class Command {
 	String name;

@@ -1,4 +1,4 @@
-package com.infosys.retailrobot.entities;
+package com.infosys.retailrobot.gherkin;
 
 import gherkin.deps.com.google.gson.annotations.Expose;
 import gherkin.deps.com.google.gson.annotations.SerializedName;
