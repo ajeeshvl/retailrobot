@@ -15,6 +15,7 @@ public class GherkinDriver {
 	
 	public static void main(String[] args) throws Exception {
 		
+		//System.out.println(args[0]);
 		String featurePath = "src/main/resources/login.feature";
 		GherkinMapper g = new GherkinMapper();
 		Command command = null;
@@ -43,6 +44,6 @@ public class GherkinDriver {
 		}
 
 		 ObjectMap o=new ObjectMapper().mapUIObjectToObject("btn_login");
-		 System.out.println(o.getRev());
+		 System.out.println("my object "+o.getObjects().getClassname());
 	}
 }
