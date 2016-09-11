@@ -17,7 +17,7 @@ public class ObjectMapper {
 	public ObjectMap mapUIObjectToObject(String _objectName){
 		String json ="";
 		try {
-			json = HttpClient.invokeEndPoint("http://10.11.160.143:5984/retail_object_bank/"+_objectName, "GET", "");
+			json = HttpClient.invokeEndPoint("http://localhost:5984/retail_object_bank/"+_objectName, "GET", "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

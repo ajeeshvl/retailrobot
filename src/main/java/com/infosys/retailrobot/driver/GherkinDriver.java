@@ -1,67 +1,54 @@
 package com.infosys.retailrobot.driver;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
+
+import org.openqa.selenium.WebDriver;
 
 import com.infosys.retailrobot.gherkin.Element;
 import com.infosys.retailrobot.gherkin.Feature;
 import com.infosys.retailrobot.gherkin.GherkinMapper;
 import com.infosys.retailrobot.gherkin.Step;
-import com.infosys.retailrobot.objects.ObjectMap;
-import com.infosys.retailrobot.objects.ObjectMapper;
+import com.infosys.retailrobot.utils.FileManage;
+import com.infosys.retailrobot.utils.FileMatchType;
 import com.infosys.retailrobot.utils.LogHelper;
-import com.infosys.retailrobot.webdriver.Actions;
+import com.infosys.retailrobot.webdriver.UIActions;
+import com.infosys.retailrobot.webdriver.WebDriverFactory;
 
 public class GherkinDriver {
 
 	public static void main(String[] args) throws Exception {
 
-		// System.out.println(args[0]);
-		String featurePath = "src/main/resources/search.feature";
-		GherkinMapper g = new GherkinMapper();
-		Command commandParsed = null;
-		List<Command> commandsList = new ArrayList<Command>();
-		Feature feature = g.mapFeatureToObject(featurePath);
-		System.out.println(feature.getDescription());
-
-		// iterate each step and separate actions and objects
-		for (Element element : feature.getElements()) {
-			for (Step step : element.getSteps()) {
-				System.out.println("Step Parsing: " + step.getName());
-				commandParsed = StepParser.convertToCommand(step.getName());
-
-				System.out.println("Parsed Steps: " + commandParsed.getName() + " " + commandParsed.getObject() + " "
-						+ commandParsed.getValue() + "\n");
-				commandsList.add(commandParsed);
-			}
+		config.BaseURI = args[0];
+		
+		// Get all master feature files
+		File[] masterFeatureFiles=FileManage.getFilesEndWith("src/main/resources",FileMatchType.ENDWITH, "test.feature");
+		
+		// Iterate through each master feature and store the sub features in a map
+		Map<String, List> featureMapper = new LinkedHashMap<String, List>();
+		for(File masterFeatureFile:masterFeatureFiles){
+			
+			Feature masterFeature = GherkinMapper.mapFeatureToObject(masterFeatureFile.toString());
+			List<String> subFeatures = Parser.getSubFeatures(masterFeature);
+			
+			featureMapper.put(masterFeatureFile.toString(), subFeatures);
 		}
-		Actions.startDriver("http://www.sears.com");
-		testRunner(commandsList);
-		Actions.driver.quit();
+		
+		// Iterate though each feature from each master file and execute in order
+		for(Map.Entry<String, List> map: featureMapper.entrySet())
+		{
+			LogHelper.log("Executing the master test case: "+map.getKey()+ "...");
+			List<String> subFeatures = map.getValue();
+			for(String subFeature: subFeatures){
+				Executer.featureRunner(subFeature);
+			}
+			
+		}
+		LogHelper.log("Retail Website: "+config.BaseURI+" verification completed successfully");
 	}
 
-	static void testRunner(List<Command> commandsList) throws InterruptedException {
-		// Iterate through each step and do the execution
-		for (Command command : commandsList) {
-			ActionsEnum enumval = ActionsEnum.valueOf(command.getName());
-			switch (enumval) {
-			case fill: {
-				Actions.type(command.getObject(), command.getValue());
-				break;
-			}
-			case click: {
-				Actions.click(command.getObject());
-				break;
-			}
-			case verify: {
-				Actions.verify(command.getObject());
-				break;
-			}
-			default:
-				break;
-			}
-
-		}
-
-	}
 }

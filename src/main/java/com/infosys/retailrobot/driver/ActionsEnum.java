@@ -1,7 +1,9 @@
 package com.infosys.retailrobot.driver;
 
 public enum ActionsEnum {
-fill,
+type,
 click,
-verify
+verify,
+clickIfFound,
+NoValue
 }

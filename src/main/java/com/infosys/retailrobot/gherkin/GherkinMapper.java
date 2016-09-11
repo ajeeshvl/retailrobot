@@ -19,7 +19,7 @@ public class GherkinMapper{
 
 	long startTime = System.currentTimeMillis();
 
-	public Feature mapFeatureToObject(String fPath) {
+	public static Feature mapFeatureToObject(String fPath) {
 		String gherkin = null;
 		try {
 			gherkin = FixJava.readReader(new InputStreamReader(
