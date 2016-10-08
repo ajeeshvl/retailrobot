@@ -24,7 +24,7 @@ public class Executer {
 		for (File subfeatureFile : subFeatureFiles) {
 			Feature feature = GherkinMapper.mapFeatureToObject(subfeatureFile.toString());
 			List<Command> commandsList = Parser.getStepCommands(feature);
-			WebDriver driver = WebDriverFactory.getDriver();
+			//WebDriver driver = WebDriverFactory.getDriver();
 			getActions().navigate(config.BaseURI);
 			
 			// Iterate through each step and do the execution
