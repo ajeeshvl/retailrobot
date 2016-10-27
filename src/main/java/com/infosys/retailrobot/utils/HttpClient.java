@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class HttpClient {
 	public static String invokeEndPoint(String uri, String requestMethod,
-			String requestBody) throws Exception {
+		String requestBody) throws Exception {
 		int responseCode=0;
 		HttpURLConnection connection=null;
 		StringBuilder response = new StringBuilder();

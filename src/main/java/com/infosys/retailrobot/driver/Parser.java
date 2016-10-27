@@ -28,7 +28,7 @@ public class Parser {
 			// e.printStackTrace();
 		}
 		return command;
-	}
+	} 
 
 	public static String convertToFeature(String line) {
 		Pattern p = Pattern.compile("\"([^\"]*)\"");

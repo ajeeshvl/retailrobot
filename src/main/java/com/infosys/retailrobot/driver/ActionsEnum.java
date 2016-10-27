@@ -5,5 +5,6 @@ type,
 click,
 verify,
 clickIfFound,
-NoValue
+NoValue,
+enter
 }
