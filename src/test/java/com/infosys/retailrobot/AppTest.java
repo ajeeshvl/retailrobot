@@ -39,8 +39,7 @@ public class AppTest extends TestCase {
 	 * @throws IOException
 	 */
 	public void testApp() throws IOException {
-		System.setProperty("http.proxyHost", "webproxysea.nordstrom.net");
-		System.setProperty("http.proxyPort", "8181");
+	
 		String url = "http://stackoverflow.com/questions/2835505";
 
 		Document document = Jsoup.connect(url).get();
